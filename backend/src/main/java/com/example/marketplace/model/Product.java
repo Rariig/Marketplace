@@ -1,9 +1,13 @@
 package com.example.marketplace.model;
 
+import lombok.Getter;
+import lombok.Setter;
 import jakarta.persistence.*;
 
 @Entity
 @Table(name = "products")
+@Getter
+@Setter
 public class Product {
 
     @Id
