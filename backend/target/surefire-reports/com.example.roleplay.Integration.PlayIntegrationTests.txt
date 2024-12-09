@@ -1,8 +1,8 @@
 -------------------------------------------------------------------------------
 Test set: com.example.roleplay.Integration.PlayIntegrationTests
 -------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 0.316 s <<< FAILURE! -- in com.example.roleplay.Integration.PlayIntegrationTests
-com.example.roleplay.Integration.PlayIntegrationTests -- Time elapsed: 0.316 s <<< ERROR!
+Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 0.218 s <<< FAILURE! -- in com.example.roleplay.Integration.PlayIntegrationTests
+com.example.roleplay.Integration.PlayIntegrationTests -- Time elapsed: 0.218 s <<< ERROR!
 java.lang.IllegalStateException: Unable to find a @SpringBootConfiguration, you need to use @ContextConfiguration or @SpringBootTest(classes=...) with your test
 	at org.springframework.util.Assert.state(Assert.java:76)
 	at org.springframework.boot.test.context.SpringBootTestContextBootstrapper.findConfigurationClass(SpringBootTestContextBootstrapper.java:246)
