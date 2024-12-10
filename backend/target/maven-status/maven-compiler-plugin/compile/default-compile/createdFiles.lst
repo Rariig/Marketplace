@@ -1,5 +1,4 @@
 com\example\roleplay\model\Play.class
 com\example\roleplay\controller\PlayController.class
 com\example\roleplay\service\PlayService.class
-com\company\Application.class
 com\example\roleplay\repository\PlayRepository.class
