@@ -25,4 +25,7 @@ public class Play {
 
     private Integer actorsCount; // Number of actors involved
 
+    @Lob
+    @Column(name = "script", columnDefinition = "TEXT") 
+    private String script; // Script with embedded timing metadata and styling markers
 }

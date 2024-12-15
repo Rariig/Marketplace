@@ -1,16 +1,14 @@
-// src/App.js
-
 import React from 'react';
-import AddPlay from './Plays/AddPlay';
+import YourPlays from './Plays/YourPlays'; // Adjust path if necessary
 
-const App = () => {
+function App() {
   return (
-    <div>
-      <h1>Roleplay App</h1>
-      <AddPlay />
+    <div className="App">
+      <h1>Welcome to the Play Manager</h1>
+      <YourPlays />
     </div>
   );
-};
+}
 
 export default App;
 
