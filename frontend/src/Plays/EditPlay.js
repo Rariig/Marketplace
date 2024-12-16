@@ -9,7 +9,8 @@ const EditPlay = ({ playId, onClose }) => {
     plot: '',
     genre: '',
     duration: '',
-    actorsCount: ''
+    actorsCount: '',
+    script: '',
   });
 
   const [loading, setLoading] = useState(true);
@@ -54,7 +55,7 @@ const EditPlay = ({ playId, onClose }) => {
 
   return (
     <div className="edit-play-container">
-      <h2>Edit Play</h2>
+      <h2>Editing Play: {play.title}</h2>
       <form onSubmit={handleSubmit}>
         <div>
           <label htmlFor="title">Title:</label>
@@ -105,6 +106,18 @@ const EditPlay = ({ playId, onClose }) => {
             name="actorsCount"
             value={play.actorsCount}
             onChange={handleChange}
+          />
+        </div>
+        <div>
+          <label htmlFor="script">Script (with timing metadata):</label>
+          <textarea
+            id="script"
+            name="script"
+            value={play.script}
+            onChange={handleChange}
+            rows="6"
+            placeholder="Enter script with timing metadata (e.g., [5][italic] A tragic story...)"
+            required
           />
         </div>
         <div>

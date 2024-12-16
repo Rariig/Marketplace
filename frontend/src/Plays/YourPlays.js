@@ -1,32 +1,51 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import deletePlay from './DeleteFunc';
-import editPlay from './EditFunc';  // Import deletePlay function
+import EditPlay from './EditPlay';
 
 function YourPlays() {
-  // State to store the plays data
-  const [plays, setPlays] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [plays, setPlays] = useState([]); // State to store the plays data
+  const [loading, setLoading] = useState(true); // Loading state
+  const [editPlayId, setEditPlayId] = useState(null); // Store the ID of the play to edit
 
   // Fetch plays when the component mounts
   useEffect(() => {
-    // Make an HTTP request to fetch the plays from the backend API
-    axios.get('http://localhost:8080/api/plays')
-      .then(response => {
-        // Update the state with the fetched plays
+    fetchPlays(); // Fetch data when the component mounts
+  }, []);
+
+  // Function to fetch plays from the backend
+  const fetchPlays = () => {
+    axios
+      .get('http://localhost:8080/api/plays')
+      .then((response) => {
         setPlays(response.data);
-        setLoading(false); // Set loading to false once data is fetched
+        setLoading(false);
       })
-      .catch(error => {
+      .catch((error) => {
         console.error('Error fetching plays:', error);
         setLoading(false);
       });
-  }, []); // Empty dependency array means this runs once when the component mounts
+  };
+
+  // Function to handle opening the EditPlay component
+  const handleEdit = (id) => {
+    setEditPlayId(id); // Set the ID of the play to edit
+  };
+
+  // Function to close the EditPlay component
+  const handleClose = () => {
+    setEditPlayId(null); // Reset the editPlayId to null to close EditPlay
+    fetchPlays(); // Refresh the plays list after editing
+  };
 
   return (
     <div>
       <h1>Your Plays</h1>
-      {loading ? <p>Loading...</p> : (
+      {editPlayId ? ( // If editPlayId is set, render the EditPlay component
+        <EditPlay playId={editPlayId} onClose={handleClose} />
+      ) : loading ? (
+        <p>Loading...</p>
+      ) : (
         <table>
           <thead>
             <tr>
@@ -39,7 +58,7 @@ function YourPlays() {
             </tr>
           </thead>
           <tbody>
-            {plays.map(play => (
+            {plays.map((play) => (
               <tr key={play.id}>
                 <td>{play.title}</td>
                 <td>{play.genre}</td>
@@ -48,7 +67,7 @@ function YourPlays() {
                 <td>{play.plot ? play.plot.substring(0, 30) + '...' : 'No plot available'}</td>
                 <td>
                   <button onClick={() => deletePlay(play.id)}>Delete</button>
-                  <button onClick={() => editPlay(play)}>Edit</button>
+                  <button onClick={() => handleEdit(play.id)}>Edit</button>
                 </td>
               </tr>
             ))}

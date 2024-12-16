@@ -8,6 +8,7 @@ const AddPlay = () => {
   const [genre, setGenre] = useState('');
   const [duration, setDuration] = useState('');
   const [actorsCount, setActorsCount] = useState('');
+  const [script, setScript] = useState('');
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -18,6 +19,7 @@ const AddPlay = () => {
       genre,
       duration: parseInt(duration, 10),
       actorsCount: parseInt(actorsCount, 10),
+      script,
     };
 
     try {
@@ -36,6 +38,7 @@ const AddPlay = () => {
         setGenre('');
         setDuration('');
         setActorsCount('');
+        setScript('');
       } else {
         alert('Failed to add play');
       }
@@ -85,6 +88,16 @@ const AddPlay = () => {
             type="number"
             value={actorsCount}
             onChange={(e) => setActorsCount(e.target.value)}
+          />
+        </div>
+        <div>
+          <label>Script (with timing metadata):</label>
+          <textarea
+            value={script}
+            onChange={(e) => setScript(e.target.value)}
+            rows="6"
+            placeholder="Enter script with timing metadata (e.g., [5][italic] A tragic story...)"
+            required
           />
         </div>
         <button type="submit">Add Play</button>
