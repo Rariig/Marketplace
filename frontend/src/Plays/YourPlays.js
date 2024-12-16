@@ -10,22 +10,16 @@ function YourPlays() {
 
   // Fetch plays when the component mounts
   useEffect(() => {
-    fetchPlays(); // Fetch data when the component mounts
-  }, []);
-
-  // Function to fetch plays from the backend
-  const fetchPlays = () => {
-    axios
-      .get('http://localhost:8080/api/plays')
-      .then((response) => {
+    axios.get('http://localhost:8080/api/plays')
+      .then(response => {
         setPlays(response.data);
         setLoading(false);
       })
-      .catch((error) => {
+      .catch(error => {
         console.error('Error fetching plays:', error);
         setLoading(false);
       });
-  };
+  }, []);
 
   // Function to handle opening the EditPlay component
   const handleEdit = (id) => {
@@ -35,7 +29,6 @@ function YourPlays() {
   // Function to close the EditPlay component
   const handleClose = () => {
     setEditPlayId(null); // Reset the editPlayId to null to close EditPlay
-    fetchPlays(); // Refresh the plays list after editing
   };
 
   return (
@@ -66,7 +59,7 @@ function YourPlays() {
                 <td>{play.actorsCount}</td>
                 <td>{play.plot ? play.plot.substring(0, 30) + '...' : 'No plot available'}</td>
                 <td>
-                  <button onClick={() => deletePlay(play.id)}>Delete</button>
+                  <button onClick={() => deletePlay(play.id, setPlays)}>Delete</button>
                   <button onClick={() => handleEdit(play.id)}>Edit</button>
                 </td>
               </tr>
@@ -75,7 +68,7 @@ function YourPlays() {
         </table>
       )}
     </div>
-  );
+  ); 
 }
 
 export default YourPlays;
