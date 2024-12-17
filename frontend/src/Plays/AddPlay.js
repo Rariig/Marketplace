@@ -1,6 +1,7 @@
 // src/AddPlay.js
 
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const AddPlay = () => {
   const [title, setTitle] = useState('');
@@ -9,6 +10,8 @@ const AddPlay = () => {
   const [duration, setDuration] = useState('');
   const [actorsCount, setActorsCount] = useState('');
   const [script, setScript] = useState('');
+
+  const navigate = useNavigate(); // Hook to navigate back to YourPlays page
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -39,6 +42,7 @@ const AddPlay = () => {
         setDuration('');
         setActorsCount('');
         setScript('');
+        navigate('/');
       } else {
         alert('Failed to add play');
       }
@@ -57,13 +61,6 @@ const AddPlay = () => {
             type="text"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
-          />
-        </div>
-        <div>
-          <label>Plot:</label>
-          <textarea
-            value={plot}
-            onChange={(e) => setPlot(e.target.value)}
           />
         </div>
         <div>
@@ -88,6 +85,13 @@ const AddPlay = () => {
             type="number"
             value={actorsCount}
             onChange={(e) => setActorsCount(e.target.value)}
+          />
+        </div>
+        <div>
+          <label>Plot:</label>
+          <textarea
+            value={plot}
+            onChange={(e) => setPlot(e.target.value)}
           />
         </div>
         <div>
