@@ -105,6 +105,7 @@ const AddPlay = () => {
           />
         </div>
         <button type="submit">Add Play</button>
+        <button type="button" onClick={() => navigate('/')}>Back</button>
       </form>
     </div>
   );

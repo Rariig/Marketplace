@@ -1,9 +1,13 @@
-// EditPlay.js
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { useParams, useNavigate } from 'react-router-dom';
 
-const EditPlay = ({ playId, onClose }) => {
-  // State to hold the play's details that can be edited
+const EditPlay = ({ onClose }) => {
+
+  const params = useParams();
+  const id = params.playId;
+
+  console.log(id);
   const [play, setPlay] = useState({
     title: '',
     plot: '',
@@ -12,43 +16,45 @@ const EditPlay = ({ playId, onClose }) => {
     actorsCount: '',
     script: '',
   });
-
   const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
 
   useEffect(() => {
-    // Fetch the play details from the backend when the component mounts
-    axios.get(`http://localhost:8080/api/plays/${playId}`)
+    console.log('Play ID:', id); // Debugging line
+    if (id) {
+      axios.get(`http://localhost:8080/api/plays/${id}`)
+        .then((response) => {
+          console.log('Fetched play data:', response.data); // Debugging line
+          setPlay(response.data);
+          setLoading(false);
+        })
+        .catch((error) => {
+          console.error('Error fetching play:', error);
+          setLoading(false);
+        });
+    }
+  }, [id]);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    axios.put(`http://localhost:8080/api/plays/${id}`, play)
       .then((response) => {
-        setPlay(response.data);  // Set the state with the play data
-        setLoading(false);
+        console.log('Play updated successfully:', response.data);
+        alert('Play updated successfully!');
+        navigate('/'); // Navigate back to the 'Your Plays' page
       })
       .catch((error) => {
-        console.error('Error fetching play:', error);
-        setLoading(false);
+        console.error('Error updating play:', error);
+        alert('Failed to update play. Please try again.');
       });
-  }, [playId]);
+  };
 
-  // Handle form input changes
   const handleChange = (e) => {
     const { name, value } = e.target;
     setPlay((prevPlay) => ({
       ...prevPlay,
-      [name]: value
+      [name]: value,
     }));
-  };
-
-  // Handle form submission for editing the play
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    axios.put(`http://localhost:8080/api/plays/${playId}`, play)
-      .then((response) => {
-        console.log('Play updated successfully:', response.data);
-        onClose();  // Close the edit form/modal after successful update
-      })
-      .catch((error) => {
-        console.error('Error updating play:', error);
-      });
   };
 
   if (loading) return <div>Loading...</div>;
@@ -122,7 +128,7 @@ const EditPlay = ({ playId, onClose }) => {
         </div>
         <div>
           <button type="submit">Save Changes</button>
-          <button type="button" onClick={onClose}>Cancel</button>
+          <button type="button" onClick={() => navigate('/')}>Cancel</button>
         </div>
       </form>
     </div>

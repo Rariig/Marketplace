@@ -9,7 +9,7 @@ const App = () => {
     <Router>
       <Routes>
         <Route path="/" element={<YourPlays />} /> {/* Main screen showing all plays */}
-        <Route path="/edit/:playId" element={<EditPlay />} /> {/* Edit screen */}
+        <Route path="/edit-play/:playId" element={<EditPlay />} /> {/* Edit screen */}
         <Route path="/add-play" element={<AddPlay />} />
       </Routes>
     </Router>

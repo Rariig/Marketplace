@@ -1,13 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import deletePlay from './DeleteFunc';
-import EditPlay from './EditPlay';
 import { useNavigate } from 'react-router-dom'; // Import useNavigate hook
 
 function YourPlays() {
   const [plays, setPlays] = useState([]); // State to store the plays data
   const [loading, setLoading] = useState(true); // Loading state
-  const [editPlayId, setEditPlayId] = useState(null); // Store the ID of the play to edit
   const navigate = useNavigate(); 
 
   // Fetch plays when the component mounts
@@ -25,13 +23,9 @@ function YourPlays() {
 
   // Function to handle opening the EditPlay component
   const handleEdit = (id) => {
-    setEditPlayId(id); // Set the ID of the play to edit
+    navigate(`/edit-play/${id}`); // Ensure correct route syntax
   };
 
-  // Function to close the EditPlay component
-  const handleClose = () => {
-    setEditPlayId(null); // Reset the editPlayId to null to close EditPlay
-  };
   const handleAddPlay = () => {
     navigate('/add-play'); // Navigate to the AddPlay route
   };
@@ -41,9 +35,7 @@ function YourPlays() {
       <h1>Your Plays</h1>
       {/* Button to navigate to AddPlay */}
       <button onClick={handleAddPlay}>Add Play</button>
-      {editPlayId ? ( // If editPlayId is set, render the EditPlay component
-        <EditPlay playId={editPlayId} onClose={handleClose} />
-      ) : loading ? (
+      {loading ? (
         <p>Loading...</p>
       ) : (
         <table>
