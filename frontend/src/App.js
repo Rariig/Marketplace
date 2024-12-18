@@ -3,6 +3,8 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import YourPlays from './Plays/YourPlays'; // Replace with your actual component for displaying the list
 import EditPlay from './Plays/EditPlay';
 import AddPlay from './Plays/AddPlay';
+import './index.css'; // or the path to your Tailwind CSS file
+
 
 const App = () => {
   return (

@@ -3,11 +3,9 @@ import axios from 'axios';
 import { useParams, useNavigate } from 'react-router-dom';
 
 const EditPlay = ({ onClose }) => {
-
   const params = useParams();
   const id = params.playId;
 
-  console.log(id);
   const [play, setPlay] = useState({
     title: '',
     plot: '',
@@ -20,11 +18,9 @@ const EditPlay = ({ onClose }) => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    console.log('Play ID:', id); // Debugging line
     if (id) {
       axios.get(`http://localhost:8080/api/plays/${id}`)
         .then((response) => {
-          console.log('Fetched play data:', response.data); // Debugging line
           setPlay(response.data);
           setLoading(false);
         })
@@ -39,7 +35,6 @@ const EditPlay = ({ onClose }) => {
     e.preventDefault();
     axios.put(`http://localhost:8080/api/plays/${id}`, play)
       .then((response) => {
-        console.log('Play updated successfully:', response.data);
         alert('Play updated successfully!');
         navigate('/'); // Navigate back to the 'Your Plays' page
       })
@@ -60,75 +55,106 @@ const EditPlay = ({ onClose }) => {
   if (loading) return <div>Loading...</div>;
 
   return (
-    <div className="edit-play-container">
-      <h2>Editing Play: {play.title}</h2>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="title">Title:</label>
+    <div className="max-w-4xl mx-auto p-6 bg-white rounded-lg shadow-lg">
+      <h2 className="text-2xl font-semibold text-center mb-6">Editing Play: {play.title}</h2>
+      <form onSubmit={handleSubmit} className="space-y-6">
+        {/* Title */}
+        <div className="flex flex-col">
+          <label htmlFor="title" className="text-lg font-medium text-gray-700 mb-2">Title:</label>
           <input
             type="text"
             id="title"
             name="title"
             value={play.title}
             onChange={handleChange}
+            className="border border-gray-300 rounded-md p-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500"
             required
           />
         </div>
-        <div>
-          <label htmlFor="plot">Plot:</label>
+
+        {/* Plot */}
+        <div className="flex flex-col">
+          <label htmlFor="plot" className="text-lg font-medium text-gray-700 mb-2">Plot:</label>
           <textarea
             id="plot"
             name="plot"
             value={play.plot}
             onChange={handleChange}
+            className="border border-gray-300 rounded-md p-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+            rows="4"
             required
           />
         </div>
-        <div>
-          <label htmlFor="genre">Genre:</label>
+
+        {/* Genre */}
+        <div className="flex flex-col">
+          <label htmlFor="genre" className="text-lg font-medium text-gray-700 mb-2">Genre:</label>
           <input
             type="text"
             id="genre"
             name="genre"
             value={play.genre}
             onChange={handleChange}
+            className="border border-gray-300 rounded-md p-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500"
           />
         </div>
-        <div>
-          <label htmlFor="duration">Duration (minutes):</label>
+
+        {/* Duration */}
+        <div className="flex flex-col">
+          <label htmlFor="duration" className="text-lg font-medium text-gray-700 mb-2">Duration (minutes):</label>
           <input
             type="number"
             id="duration"
             name="duration"
             value={play.duration}
             onChange={handleChange}
+            className="border border-gray-300 rounded-md p-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500"
           />
         </div>
-        <div>
-          <label htmlFor="actorsCount">Number of Actors:</label>
+
+        {/* Number of Actors */}
+        <div className="flex flex-col">
+          <label htmlFor="actorsCount" className="text-lg font-medium text-gray-700 mb-2">Number of Actors:</label>
           <input
             type="number"
             id="actorsCount"
             name="actorsCount"
             value={play.actorsCount}
             onChange={handleChange}
+            className="border border-gray-300 rounded-md p-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500"
           />
         </div>
-        <div>
-          <label htmlFor="script">Script (with timing metadata):</label>
+
+        {/* Script */}
+        <div className="flex flex-col">
+          <label htmlFor="script" className="text-lg font-medium text-gray-700 mb-2">Script (with timing metadata):</label>
           <textarea
             id="script"
             name="script"
             value={play.script}
             onChange={handleChange}
+            className="border border-gray-300 rounded-md p-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500"
             rows="6"
             placeholder="Enter script with timing metadata (e.g., [5][italic] A tragic story...)"
             required
           />
         </div>
-        <div>
-          <button type="submit">Save Changes</button>
-          <button type="button" onClick={() => navigate('/')}>Cancel</button>
+
+        {/* Buttons */}
+        <div className="flex justify-between">
+          <button
+            type="submit"
+            className="bg-indigo-600 text-white py-2 px-4 rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+          >
+            Save Changes
+          </button>
+          <button
+            type="button"
+            onClick={() => navigate('/')}
+            className="bg-gray-300 text-gray-700 py-2 px-4 rounded-md hover:bg-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-500"
+          >
+            Cancel
+          </button>
         </div>
       </form>
     </div>
