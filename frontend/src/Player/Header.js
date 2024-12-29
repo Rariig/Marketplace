@@ -8,6 +8,9 @@ const Header = () => {
       <nav>
         <ul className="flex items-center space-x-12 text-2xl pr-24">
           <li>
+            <Link to="/playGrid" className="hover:underline">Play Grid</Link>
+          </li>
+          <li>
             <Link to="/" className="hover:underline">Home</Link>
           </li>
           <li>
