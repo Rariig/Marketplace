@@ -52,6 +52,18 @@ const EditPlay = ({ onClose }) => {
     }));
   };
 
+  const [imageUrl, setImageUrl] = useState(null);//
+    const handleImageUpload = (e) => {
+      const file = e.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onloadend = () => {
+          setImageUrl(reader.result); // Set the uploaded image URL
+        };
+        reader.readAsDataURL(file);
+      }
+    };
+
   if (loading) return <div>Loading...</div>;
 
   return (
@@ -139,6 +151,29 @@ const EditPlay = ({ onClose }) => {
             required
           />
         </div>
+        {/* Background Image */}
+        <div className="flex flex-col">
+          <label className="text-lg font-medium text-gray-700 mb-2">Background Image:</label>
+          <div className="relative">
+            <input
+              type="file"
+              accept="image/*"
+              onChange={(e) => handleImageUpload(e)} // Handle image upload (you can set the image URL to a state)
+              className="border border-gray-300 rounded-md p-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+            />
+            
+            {/* Display the uploaded image as a small preview */}
+            {imageUrl && (
+              <div className="relative mt-4">
+                <div
+                  className="w-40 h-40 bg-cover bg-center rounded-md"
+                  style={{ backgroundImage: `url(${imageUrl})` }} // Set background image
+                ></div>
+              </div>
+            )}
+          </div>
+        </div>
+
 
         {/* Buttons */}
         <div className="flex justify-between">

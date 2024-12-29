@@ -83,6 +83,11 @@
             <version>3.24.2</version> <!-- Update to the latest version if needed -->
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>com.amazonaws</groupId>
+            <artifactId>aws-java-sdk-s3</artifactId>
+            <version>1.12.300</version> <!-- Choose the latest version -->
+        </dependency>
     </dependencies>
 
     <!-- Build section -->

@@ -1,6 +1,8 @@
+D:\Marketplace\backend\src\main\java\com\example\roleplay\service\S3Service.java
 D:\Marketplace\backend\src\main\java\com\example\roleplay\controller\PlayController.java
 D:\Marketplace\backend\src\main\java\com\example\roleplay\model\Play.java
 D:\Marketplace\backend\src\main\java\com\example\roleplay\config\WebConfig.java
 D:\Marketplace\backend\src\main\java\com\example\roleplay\service\PlayService.java
+D:\Marketplace\backend\src\main\java\com\example\roleplay\config\S3Config.java
 D:\Marketplace\backend\src\main\java\com\example\roleplay\repository\PlayRepository.java
 D:\Marketplace\backend\src\main\java\com\Application.java

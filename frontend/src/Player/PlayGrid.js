@@ -28,25 +28,28 @@ const PlayGrid = () => {
   }
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-      {plays.map((play) => (
-        <div key={play.id} className="bg-white rounded-lg shadow-md p-4 hover:shadow-lg relative">
-          {/* Optionally, use background image or leave as plain */}
-          <div
-            className="h-64 bg-cover bg-center rounded-lg"
-            style={{ backgroundImage: `url(${play.imageUrl || 'default.jpg'})` }}
-          >
-            <Link
-              to={`/playGrid/${play.id}`} // This makes each card clickable and routes to PlayDetail
-              className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 text-white font-semibold text-lg rounded-lg"
+    <div className="px-8 pt-8">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-8">
+        {plays.map((play) => (
+          <div key={play.id} className="bg-white rounded-lg shadow-md p-4 hover:shadow-lg relative">
+            {/* Smaller grid item with reduced height */}
+            <div
+              className="h-48 bg-cover bg-center rounded-lg"
+              style={{ backgroundImage: `url(${play.imageUrl || 'default.jpg'})` }}
             >
-              {play.title || 'No Title'}
-            </Link>
+              <Link
+                to={`/playGrid/${play.id}`} // This makes each card clickable and routes to PlayDetail
+                className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 text-white font-semibold text-lg rounded-lg"
+              >
+                {play.title || 'No Title'}
+              </Link>
+            </div>
           </div>
-        </div>
-      ))}
+        ))}
+      </div>
     </div>
   );
+  
 };
 
 export default PlayGrid;
